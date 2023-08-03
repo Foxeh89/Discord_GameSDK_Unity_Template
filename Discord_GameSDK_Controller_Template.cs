@@ -123,7 +123,29 @@ public class Discord_GameSDK_Controller_Template : MonoBehaviour
 	
 	void Update()
     {
-        //you can change the status variables here
+        //here's an example of how you can just check what scene you're in and just run that method in update.
+		Scene scene = SceneManager.GetActiveScene(); //im just getting the active scene because i like changing the status message based on the scene im in.
+
+		//runs one of the voids depending on what scene is active.
+        if (Application.isPlaying)
+        {
+            if (scene.name == menuSceneName && scene.name != multiplayerSceneName)
+            {
+                //print("in menus");
+                SetValuesToMenu();
+            }
+            if (scene.name == multiplayerSceneName && scene.name != menuSceneName)
+            {
+                //print("in multiplayer");
+                SetValuesToMultiplayerRoom();
+            }
+            if (scene.name != menuSceneName && scene.name != multiplayerSceneName)
+            {
+                //print("in stage");
+                SetValues();
+            }
+            
+        }
 
         //We only want RunCallbacks happening after discord has started, to prevent errors from happening.
         if (scriptState != ScriptStates.Inactive)
